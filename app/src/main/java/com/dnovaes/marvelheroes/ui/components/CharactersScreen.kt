@@ -82,7 +82,7 @@ class CharactersScreen(context: Context): ScreenLayout(context) {
     }
 
     private fun dispatchLoadCharacters() {
-        val stepZeroIndexed = currentStep
+        val stepZeroIndexed = currentStep-1
         val payload = CharacterPayload((stepZeroIndexed)*CHARACTERS_PER_SCREEN, searchFilter)
         ActionCreator.instance.loadCharacters(payload)
     }

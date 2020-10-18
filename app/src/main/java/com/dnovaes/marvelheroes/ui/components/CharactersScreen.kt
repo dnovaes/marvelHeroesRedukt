@@ -25,6 +25,12 @@ class CharactersScreen(context: Context): ScreenLayout(context) {
             indeterminate(true)
             visibility(state.syncing)
         }
+
+        characterFeed {
+            size(MATCH, MATCH)
+            items(state.characters.values.toList())
+            renderIfChanged()
+        }
     }
 
     override fun renderFooter() {
@@ -32,7 +38,8 @@ class CharactersScreen(context: Context): ScreenLayout(context) {
     }
 
     override fun hasChanged(newState: AppState, oldState: AppState): Boolean {
-        return newState.syncing != oldState.syncing
+        return newState.syncing != oldState.syncing ||
+            oldState.characters != newState.characters
     }
 
     override fun onChanged(state: AppState) {

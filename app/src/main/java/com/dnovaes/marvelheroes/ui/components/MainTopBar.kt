@@ -108,7 +108,7 @@ class MainTopBar(context: Context): LinearLayoutComponent(context) {
 
         linearLayout {
             size(MATCH, WRAP)
-            backgroundResource(R.drawable.background_dashed)
+            backgroundResource(R.drawable.background_rounded)
             margin(0, 0, 0, context.dp(R.dimen.margin_xx_default))
 
             editText {

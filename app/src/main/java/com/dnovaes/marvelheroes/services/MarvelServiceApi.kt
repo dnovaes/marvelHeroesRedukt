@@ -33,7 +33,7 @@ object MarvelServiceApi : BaseApi() {
 
     private val service = retrofit.create(MarvelService::class.java)
     private const val APIKEY = "f68005f184c4d81cb33ddd7836eb7f28"
-    private const val LIMIT = 50
+    private const val LIMIT = 4
 
     fun getCharacters(offset: Int, onSuccess: ((ServerResponse<Character>) -> Unit), onFail: ((String) -> Unit)) {
         val timeStamp = Timestamp(System.currentTimeMillis()).toString()

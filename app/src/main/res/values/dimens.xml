@@ -5,6 +5,7 @@
     <dimen name="two_dip">2dp</dimen>
     <dimen name="sync_bar">6dp</dimen>
     <dimen name="divider_mainscreen">24dp</dimen>
+    <dimen name="divider_footer">12dp</dimen>
 
     <!-- Radius -->
     <dimen name="radius_tiny">4dp</dimen>
@@ -56,4 +57,5 @@
 
     <!-- Icons -->
     <dimen name="icon_small">24dp</dimen>
+    <dimen name="icon_medium">36dp</dimen>
 </resources>

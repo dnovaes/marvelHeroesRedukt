@@ -1,23 +1,28 @@
 package com.dnovaes.marvelheroes.ui.components.base
 
 import android.content.Context
-import android.graphics.Color.RED
 import com.dnovaes.marvelheroes.R
+import com.dnovaes.marvelheroes.extensions.color
 import com.dnovaes.marvelheroes.extensions.dp
-import com.dnovaes.marvelheroes.ui.anvil.ReactiveLinearComponent
+import com.dnovaes.marvelheroes.ui.anvil.ReactiveRelativeComponent
 import com.dnovaes.marvelheroes.ui.components.mainTopBar
 import trikita.anvil.BaseDSL.MATCH
 import trikita.anvil.BaseDSL.WRAP
+import trikita.anvil.BaseDSL.below
 import trikita.anvil.BaseDSL.size
 import trikita.anvil.DSL.backgroundColor
-import trikita.anvil.DSL.orientation
+import trikita.anvil.DSL.id
 import trikita.anvil.DSL.view
 
-abstract class ScreenLayout(context: Context): ReactiveLinearComponent(context) {
+abstract class ScreenLayout(context: Context): ReactiveRelativeComponent(context) {
+
+    companion object {
+        val mainTopBarId = generateViewId()
+        val redDividerId = generateViewId()
+    }
 
     override fun view() {
         size(MATCH, MATCH)
-        orientation(VERTICAL)
 
         renderTopBar()
         renderBody()
@@ -26,6 +31,7 @@ abstract class ScreenLayout(context: Context): ReactiveLinearComponent(context) 
 
     private fun renderTopBar() {
         mainTopBar {
+            id(mainTopBarId)
             size(MATCH, WRAP)
         }
         renderRedDivider()
@@ -33,8 +39,10 @@ abstract class ScreenLayout(context: Context): ReactiveLinearComponent(context) 
 
     private fun renderRedDivider() {
         view {
+            id(redDividerId)
             size(MATCH, context.dp(R.dimen.divider_mainscreen))
-            backgroundColor(RED)
+            below(mainTopBarId)
+            backgroundColor(context.color(R.color.colorPrimary))
         }
     }
 

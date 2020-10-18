@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import com.dnovaes.marvelheroes.actions.ActionCreator
 import com.dnovaes.marvelheroes.database.ObjectBox
+import com.dnovaes.marvelheroes.middleware.CharacterMiddleware
 import com.dnovaes.marvelheroes.middleware.SyncMiddleware
 import com.dnovaes.marvelheroes.models.AppState
 import com.dnovaes.marvelheroes.reducers.CharacterReducer
@@ -33,6 +34,7 @@ class MarvelHeroesApplication: Application() {
 
         private fun addMiddlewares(context: Context, redukt: Redukt<AppState>) {
             redukt.middlewares["syncMiddleware"] = SyncMiddleware()
+            redukt.middlewares["characterMiddleware"] = CharacterMiddleware()
         }
     }
 

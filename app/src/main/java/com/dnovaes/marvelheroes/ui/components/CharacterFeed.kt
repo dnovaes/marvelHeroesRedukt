@@ -20,7 +20,6 @@ import trikita.anvil.BaseDSL.CENTER_VERTICAL
 import trikita.anvil.BaseDSL.text
 import trikita.anvil.BaseDSL.textSize
 import trikita.anvil.BaseDSL.weight
-import trikita.anvil.DSL
 import trikita.anvil.DSL.backgroundColor
 import trikita.anvil.DSL.gravity
 import trikita.anvil.DSL.textView

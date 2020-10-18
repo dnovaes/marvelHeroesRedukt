@@ -1,6 +1,7 @@
 package com.dnovaes.marvelheroes.actions
 
 import com.dnovaes.marvelheroes.MarvelHeroesApplication
+import com.dnovaes.marvelheroes.actions.Actions.LOAD_CHARACTERS
 import com.dnovaes.marvelheroes.actions.Actions.LOAD_STATE
 import com.dnovaes.marvelheroes.actions.Actions.SAVE_CHARACTERS
 import com.dnovaes.marvelheroes.actions.Actions.UPDATE_SYNC
@@ -19,6 +20,10 @@ class ActionCreator private constructor() {
 
     fun loadState() {
         asyncDispatch(Action<Any>(LOAD_STATE))
+    }
+
+    fun loadCharacters(offset: Int) {
+        asyncDispatch(Action<Any>(LOAD_CHARACTERS, offset))
     }
 
     fun saveCharacters(content: List<Character>) {

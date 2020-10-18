@@ -3,6 +3,7 @@ package com.dnovaes.marvelheroes.ui.components
 import android.content.Context
 import com.dnovaes.marvelheroes.MarvelHeroesApplication
 import com.dnovaes.marvelheroes.R
+import com.dnovaes.marvelheroes.actions.ActionCreator
 import com.dnovaes.marvelheroes.extensions.dp
 import com.dnovaes.marvelheroes.models.AppState
 import com.dnovaes.marvelheroes.ui.anvil.highOrderComponent
@@ -27,6 +28,7 @@ class CharactersScreen(context: Context): ScreenLayout(context) {
     companion object {
         val characterFeedId = generateViewId()
         val navigationFooterId = generateViewId()
+        const val CHARACTERS_PER_SCREEN = 4
     }
 
     override fun renderBody() {
@@ -54,7 +56,9 @@ class CharactersScreen(context: Context): ScreenLayout(context) {
             size(MATCH, WRAP)
             alignParentBottom()
             init {
-                onNavigate { }
+                onNavigate { step ->
+                    ActionCreator.instance.loadCharacters((step-1)*CHARACTERS_PER_SCREEN)
+                }
             }
             renderIfChanged()
         }

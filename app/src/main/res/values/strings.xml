@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">marvelHeroes</string>
+    <string name="character_name_label">Nome do Personagem</string>
+    <string name="title_search_label">BUSCA</string>
+    <string name="title_marvel_label">MARVEL</string>
+    <string name="title_content_label">TESTE FRONT-END</string>
 </resources>

@@ -6,6 +6,8 @@ import com.dnovaes.marvelheroes.actions.ActionCreator
 import com.dnovaes.marvelheroes.database.ObjectBox
 import com.dnovaes.marvelheroes.middleware.SyncMiddleware
 import com.dnovaes.marvelheroes.models.AppState
+import com.dnovaes.marvelheroes.reducers.CharacterReducer
+import com.dnovaes.marvelheroes.reducers.SyncReducer
 import com.github.raulccabreu.redukt.Redukt
 import timber.log.Timber
 
@@ -25,7 +27,8 @@ class MarvelHeroesApplication: Application() {
         }
 
         private fun addReducers(redukt: Redukt<AppState>) {
-            redukt.reducers["characterReducers"] = CharacterReducer()
+            redukt.reducers["characterReducer"] = CharacterReducer()
+            redukt.reducers["syncReducer"] = SyncReducer()
         }
 
         private fun addMiddlewares(context: Context, redukt: Redukt<AppState>) {
@@ -39,7 +42,7 @@ class MarvelHeroesApplication: Application() {
 
         ObjectBox.build(this)
         initializeRedukt(applicationContext,
-                 AppState(syncRunning= false),
+                 AppState(syncing= false),
                  BuildConfig.DEBUG).let {
             redukt = it
             ActionCreator.instance.loadState()

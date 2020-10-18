@@ -1,4 +1,4 @@
-package com.dnovaes.marvelheroes
+package com.dnovaes.marvelheroes.reducers
 
 import com.dnovaes.marvelheroes.actions.Actions.SAVE_CHARACTERS
 import com.dnovaes.marvelheroes.models.AppState

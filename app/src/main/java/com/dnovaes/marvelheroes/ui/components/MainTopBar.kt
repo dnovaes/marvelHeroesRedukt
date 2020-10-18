@@ -43,6 +43,8 @@ class MainTopBar(context: Context): LinearLayoutComponent(context) {
         val titleMarvelLabelId = generateViewId()
     }
 
+    private var onFinishSearchTyping: ((String) -> Unit)? = null
+
     override fun view() {
         size(MATCH, WRAP)
         orientation(VERTICAL)
@@ -119,17 +121,13 @@ class MainTopBar(context: Context): LinearLayoutComponent(context) {
                 padding(context.dp(R.dimen.padding_default))
 
                 onTextChangedInit {
-/*
-                    if (it.isEmpty()) {
-                        fieldContent = null
-                        onFinishTyping?.invoke(it)
-                    } else {
-                        fieldContent = it
-                        onFinishTyping?.invoke(it)
-                    }
-*/
+                    onFinishSearchTyping?.invoke(it)
                 }
             }
         }
+    }
+
+    fun onFinishSearchTyping(callback: ((String) -> Unit)) {
+        this.onFinishSearchTyping = callback
     }
 }

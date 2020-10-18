@@ -6,6 +6,7 @@ import com.dnovaes.marvelheroes.actions.Actions.LOAD_STATE
 import com.dnovaes.marvelheroes.actions.Actions.SAVE_CHARACTERS
 import com.dnovaes.marvelheroes.actions.Actions.UPDATE_SYNC
 import com.dnovaes.marvelheroes.models.Character
+import com.dnovaes.marvelheroes.payloads.CharacterPayload
 import com.github.raulccabreu.redukt.actions.Action
 
 class ActionCreator private constructor() {
@@ -22,8 +23,8 @@ class ActionCreator private constructor() {
         asyncDispatch(Action<Any>(LOAD_STATE))
     }
 
-    fun loadCharacters(offset: Int) {
-        asyncDispatch(Action<Any>(LOAD_CHARACTERS, offset))
+    fun loadCharacters(payload: CharacterPayload) {
+        asyncDispatch(Action<Any>(LOAD_CHARACTERS, payload))
     }
 
     fun saveCharacters(content: List<Character>) {

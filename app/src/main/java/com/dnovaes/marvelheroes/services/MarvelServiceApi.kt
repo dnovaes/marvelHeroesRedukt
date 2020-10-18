@@ -51,4 +51,24 @@ object MarvelServiceApi : BaseApi() {
             }
         })
     }
+
+    fun getCharactersStartingWith(offset: Int, searchFilter: String,
+                                  onSuccess: (ServerResponse<Character>) -> Unit, onFail: (String) -> Unit) {
+
+        val timeStamp = Timestamp(System.currentTimeMillis()).toString()
+        val privateKey = BuildConfig.PRIVATE_KEY
+        val md5Hash = "$timeStamp$privateKey$APIKEY".md5()
+
+        service.getCharactersStartingWith(timeStamp, APIKEY, md5Hash, searchFilter, offset, LIMIT)
+            .enqueue(handleResponse { content, errorMessage ->
+            errorMessage?.let {
+                Timber.v("Failed on retrieving characters data: $it")
+                onFail.invoke(it)
+            } ?: apply {
+                content?.let { response ->
+                    onSuccess.invoke(response)
+                }
+            }
+        })
+    }
 }

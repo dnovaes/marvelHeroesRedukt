@@ -5,9 +5,7 @@ import com.dnovaes.marvelheroes.R
 import com.dnovaes.marvelheroes.extensions.color
 import com.dnovaes.marvelheroes.extensions.dp
 import com.dnovaes.marvelheroes.ui.anvil.ReactiveRelativeComponent
-import com.dnovaes.marvelheroes.ui.components.mainTopBar
 import trikita.anvil.BaseDSL.MATCH
-import trikita.anvil.BaseDSL.WRAP
 import trikita.anvil.BaseDSL.below
 import trikita.anvil.BaseDSL.size
 import trikita.anvil.DSL.backgroundColor
@@ -29,11 +27,7 @@ abstract class ScreenLayout(context: Context): ReactiveRelativeComponent(context
         renderFooter()
     }
 
-    private fun renderTopBar() {
-        mainTopBar {
-            id(mainTopBarId)
-            size(MATCH, WRAP)
-        }
+    open fun renderTopBar() {
         renderRedDivider()
     }
 
@@ -49,5 +43,4 @@ abstract class ScreenLayout(context: Context): ReactiveRelativeComponent(context
     abstract fun renderBody()
 
     abstract fun renderFooter()
-
 }

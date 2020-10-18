@@ -12,4 +12,3 @@ data class Character(
     val description: String,
     @Transient val thumbnail: CharacterThumbnail
 )
-

@@ -2,7 +2,9 @@ package com.dnovaes.marvelheroes
 
 import android.app.Application
 import android.content.Context
+import com.dnovaes.marvelheroes.actions.ActionCreator
 import com.dnovaes.marvelheroes.database.ObjectBox
+import com.dnovaes.marvelheroes.middleware.SyncMiddleware
 import com.dnovaes.marvelheroes.models.AppState
 import com.github.raulccabreu.redukt.Redukt
 import timber.log.Timber
@@ -22,9 +24,13 @@ class MarvelHeroesApplication: Application() {
             return redukt
         }
 
-        private fun addReducers(redukt: Redukt<AppState>) { }
+        private fun addReducers(redukt: Redukt<AppState>) {
+            redukt.reducers["characterReducers"] = CharacterReducer()
+        }
 
-        private fun addMiddlewares(context: Context, redukt: Redukt<AppState>) { }
+        private fun addMiddlewares(context: Context, redukt: Redukt<AppState>) {
+            redukt.middlewares["syncMiddleware"] = SyncMiddleware()
+        }
     }
 
     override fun onCreate() {
@@ -36,7 +42,7 @@ class MarvelHeroesApplication: Application() {
                  AppState(syncRunning= false),
                  BuildConfig.DEBUG).let {
             redukt = it
-            //ActionCreator.instance.loadState()
+            ActionCreator.instance.loadState()
         }
     }
 

@@ -19,10 +19,10 @@
     <dimen name="padding_small">4dp</dimen>
     <dimen name="padding_x_small">6dp</dimen>
     <dimen name="padding_default">8dp</dimen>
-    <dimen name="padding_default_views">10dp</dimen>
     <dimen name="padding_xx_default">12dp</dimen>
     <dimen name="padding_xxx_default">14dp</dimen>
     <dimen name="padding_medium">16dp</dimen>
+    <dimen name="padding_l_medium">18dp</dimen>
     <dimen name="padding_x_medium">20dp</dimen>
     <dimen name="padding_xx_medium">24dp</dimen>
     <dimen name="padding_large">32dp</dimen>
@@ -39,7 +39,8 @@
     <dimen name="margin_default">8dp</dimen>
     <dimen name="margin_xx_default">12dp</dimen>
     <dimen name="margin_medium">16dp</dimen>
-    <dimen name="margin_x_medium">18dp</dimen>
+    <dimen name="margin_l_medium">18dp</dimen>
+    <dimen name="margin_x_medium">20dp</dimen>
     <dimen name="margin_xx_medium">24dp</dimen>
     <dimen name="margin_large">32dp</dimen>
     <dimen name="margin_x_large">40dp</dimen>
@@ -49,11 +50,8 @@
     <dimen name="margin_x_huge">96dp</dimen>
 
     <!-- Fonts -->
-    <dimen name="body_text_size_small">12sp</dimen>
-    <dimen name="body_text_size">14sp</dimen>
-    <dimen name="subheading_text_size">16sp</dimen>
-    <dimen name="subtitle_text_size">18sp</dimen>
-    <dimen name="title_size">22sp</dimen>
+    <dimen name="body_size">14sp</dimen>
+    <dimen name="title_size">16sp</dimen>
 
     <!-- Icons -->
     <dimen name="icon_small">24dp</dimen>

@@ -16,12 +16,17 @@ import trikita.anvil.DSL.orientation
 import com.dnovaes.marvelheroes.models.Character
 import com.dnovaes.marvelheroes.utils.Font.fontWeight
 import com.dnovaes.marvelheroes.utils.FontWeight
+import com.dnovaes.marvelheroes.utils.GlideHelper.glideBitmap
+import trikita.anvil.Anvil.currentView
 import trikita.anvil.BaseDSL.CENTER_VERTICAL
+import trikita.anvil.BaseDSL.WRAP
 import trikita.anvil.BaseDSL.text
 import trikita.anvil.BaseDSL.textSize
 import trikita.anvil.BaseDSL.weight
 import trikita.anvil.DSL.backgroundColor
 import trikita.anvil.DSL.gravity
+import trikita.anvil.DSL.imageView
+import trikita.anvil.DSL.textColor
 import trikita.anvil.DSL.textView
 import trikita.anvil.DSL.view
 
@@ -37,35 +42,35 @@ class CharacterFeed(context: Context): FeedLayout<Character>(context) {
             weight(0.25f)
             orientation(HORIZONTAL)
             margin(context.dp(R.dimen.margin_large), 0)
-            padding(context.dp(R.dimen.padding_default))
+            gravity(CENTER_VERTICAL)
 
-            renderPoster(linePos)
-            renderCharacterInfo(linePos)
+            val character = items.elementAt(linePos) as? Character
+            renderThumbnail(character)
+            renderCharacterInfo(character)
         }
         renderDivider()
     }
 
-    private fun renderPoster(linePos: Int) {
-/*
+    private fun renderThumbnail(character: Character?) {
+        val thumbnail = character?.thumbnail
+        var filePath = "${thumbnail?.path}/portrait_medium.${thumbnail?.extension}"
+        filePath = filePath.replace("http:", "https:")
         imageView {
-            size(WRAP, context.dp(R.dimen.movie_feed_element_image_height))
-            glideBitmap(context, movies[linePos].poster, currentView())
-
-            onClickInit {
-                onClickMovie?.invoke(linePos)
-            }
+            size(WRAP, MATCH)
+            margin(context.dp(R.dimen.margin_l_medium))
+            glideBitmap(context, filePath, currentView())
         }
-*/
     }
 
-    private fun renderCharacterInfo(linePos: Int) {
-        val character = items.elementAt(linePos) as? Character
+    private fun renderCharacterInfo(character: Character?) {
         textView {
             size(MATCH, MATCH)
             text(character?.name ?: context.getString(R.string.character_not_found))
             gravity(CENTER_VERTICAL)
-            textSize(context.sp(R.dimen.subheading_text_size))
-            fontWeight(this.context, FontWeight.W400)
+            textSize(context.sp(R.dimen.body_size))
+            fontWeight(this.context, FontWeight.W500)
+            textColor(context.color(R.color.colorPrimary))
+            padding(context.dp(R.dimen.padding_l_medium))
         }
     }
 

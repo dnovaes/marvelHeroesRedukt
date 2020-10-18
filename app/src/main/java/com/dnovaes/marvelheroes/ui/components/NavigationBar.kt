@@ -84,7 +84,7 @@ class NavigationBar(context: Context): LinearLayoutComponent(context) {
                     textColor(context.color(R.color.colorPrimary))
                 }
                 text(stepShown.toString())
-                textSize(context.sp(R.dimen.subheading_text_size))
+                textSize(context.sp(R.dimen.body_size))
                 gravity(CENTER)
                 fontWeight(context, FontWeight.W500)
                 onClick {

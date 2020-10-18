@@ -94,7 +94,7 @@ class MainTopBar(context: Context): LinearLayoutComponent(context) {
                 text(context.getString(R.string.title_content_label))
                 textSize(context.sp(R.dimen.title_size))
                 textColor(context.color(R.color.colorPrimary))
-                fontWeight(context, FontWeight.W400)
+                fontWeight(context, FontWeight.W300)
             }
         }
     }
@@ -103,7 +103,7 @@ class MainTopBar(context: Context): LinearLayoutComponent(context) {
         textView {
             size(MATCH, WRAP)
             text(context.getString(R.string.character_name_label))
-            textSize(context.sp(R.dimen.subheading_text_size))
+            textSize(context.sp(R.dimen.body_size))
             textColor(context.color(R.color.colorPrimary))
             fontWeight(context, FontWeight.W400)
         }
@@ -115,7 +115,7 @@ class MainTopBar(context: Context): LinearLayoutComponent(context) {
 
             editText {
                 size(MATCH, WRAP)
-                textSize(context.sp(R.dimen.subheading_text_size))
+                textSize(context.sp(R.dimen.body_size))
                 textColor(context.color(R.color.colorPrimary))
                 backgroundColor(android.R.color.transparent)
                 padding(context.dp(R.dimen.padding_default))

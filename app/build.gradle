@@ -15,11 +15,32 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
-        release {
+        applicationVariants.all { variant ->
+            variant.outputs.all { output ->
+                def buildTypeName = variant.variantData.variantConfiguration.buildType.name
+                outputFileName = "marvelHeroes-$buildTypeName-v$variant.versionName"+".apk"
+            }
+        }
+
+        Properties properties = new Properties()
+        def propertiesFile = project.rootProject.file("local.properties")
+        if (propertiesFile.exists())
+            properties.load(propertiesFile.newDataInputStream())
+        def privateKey = properties.getProperty("marvelPrivateKey", "")
+
+        debug {
             minifyEnabled false
+            buildConfigField "String", "PRIVATE_KEY", "\"" + privateKey + "\""
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            minifyEnabled true
+            buildConfigField "String", "PRIVATE_KEY", "\"" + privateKey + "\""
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    flavorDimensions "default"
 }
 
 dependencies {
@@ -37,6 +58,7 @@ dependencies {
     implementation deps.anvil_sdk
     implementation deps.retrofit
     implementation deps.retrofit_converter_gson
+    implementation deps.okhttp3_logging
     implementation deps.kotlinx_coroutines
     implementation deps.timber
     implementation deps.objectbox_kotlin

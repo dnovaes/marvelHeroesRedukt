@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">marvelHeroes</string>
+    <string name="app_name">Marvel Heroes</string>
     <string name="character_name_label">Nome do Personagem</string>
     <string name="title_search_label">BUSCA</string>
     <string name="title_marvel_label">MARVEL</string>

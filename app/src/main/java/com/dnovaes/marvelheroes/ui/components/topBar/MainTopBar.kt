@@ -1,4 +1,4 @@
-package com.dnovaes.marvelheroes.ui.components
+package com.dnovaes.marvelheroes.ui.components.topBar
 
 import android.content.Context
 import com.dnovaes.marvelheroes.R
@@ -78,7 +78,7 @@ class MainTopBar(context: Context): LinearLayoutComponent(context) {
             }
 
             textView {
-                id(titleMarvelLabelId )
+                id(titleMarvelLabelId)
                 size(WRAP, WRAP)
                 toRightOf(titleSearchLabelId)
                 text(context.getString(R.string.title_marvel_label))

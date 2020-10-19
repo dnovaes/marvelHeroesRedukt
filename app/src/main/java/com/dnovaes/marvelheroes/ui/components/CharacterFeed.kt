@@ -14,9 +14,11 @@ import trikita.anvil.BaseDSL.size
 import trikita.anvil.DSL.linearLayout
 import trikita.anvil.DSL.orientation
 import com.dnovaes.marvelheroes.models.Character
+import com.dnovaes.marvelheroes.ui.anvil.onClick
 import com.dnovaes.marvelheroes.utils.Font.fontWeight
 import com.dnovaes.marvelheroes.utils.FontWeight
-import com.dnovaes.marvelheroes.utils.GlideHelper.glideBitmap
+import com.dnovaes.marvelheroes.utils.GlideHelper.replaceToHttps
+import com.dnovaes.marvelheroes.utils.GlideHelper.glideBitmapCroped
 import trikita.anvil.Anvil.currentView
 import trikita.anvil.BaseDSL.CENTER_VERTICAL
 import trikita.anvil.BaseDSL.WRAP
@@ -47,18 +49,21 @@ class CharacterFeed(context: Context): FeedLayout<Character>(context) {
             val character = items.elementAt(linePos) as? Character
             renderThumbnail(character)
             renderCharacterInfo(character)
+
+            onClick {
+                onClickItem?.invoke(character?.id ?: -1)
+            }
         }
         renderDivider()
     }
 
     private fun renderThumbnail(character: Character?) {
         val thumbnail = character?.thumbnail
-        var filePath = "${thumbnail?.path}/portrait_medium.${thumbnail?.extension}"
-        filePath = filePath.replace("http:", "https:")
+        val filePath = replaceToHttps("${thumbnail?.path}/portrait_medium.${thumbnail?.extension}")
         imageView {
             size(WRAP, MATCH)
             margin(0, context.dp(R.dimen.margin_l_medium))
-            glideBitmap(context, filePath, currentView())
+            glideBitmapCroped(context, filePath, currentView())
         }
     }
 

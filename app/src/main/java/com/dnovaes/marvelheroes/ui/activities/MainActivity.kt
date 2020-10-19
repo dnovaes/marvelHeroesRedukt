@@ -10,6 +10,7 @@ class MainActivity : ReactiveActivity() {
     override fun content() {
         charactersScreen {
             size(MATCH, MATCH)
+            activity(this@MainActivity)
         }
     }
 }

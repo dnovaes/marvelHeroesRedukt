@@ -17,11 +17,27 @@ object GlideHelper {
         return if (!usingLocalPicture) glideUrl(path) else path
     }
 
-    fun glideBitmap(context: Context, filePath: String, currentView: ImageView) {
+    fun replaceToHttps(path: String): String {
+        val regex = "(http)".toRegex(setOf(RegexOption.IGNORE_CASE))
+        return if (regex.containsMatchIn(path))
+            path.replace("http:", "https:")
+        else
+            path
+    }
+
+    fun glideBitmapCroped(context: Context, filePath: String, currentView: ImageView) {
         Glide.with(context)
             .asBitmap()
             .load(loadFilePath(filePath, false))
             .circleCrop()
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .into(currentView)
+    }
+
+    fun glideBitmap(context: Context, filePath: String, currentView: ImageView) {
+        Glide.with(context)
+            .asBitmap()
+            .load(loadFilePath(filePath, false))
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(currentView)
     }

@@ -7,8 +7,10 @@ import com.dnovaes.marvelheroes.actions.ActionCreator
 import com.dnovaes.marvelheroes.extensions.dp
 import com.dnovaes.marvelheroes.models.AppState
 import com.dnovaes.marvelheroes.payloads.CharacterPayload
+import com.dnovaes.marvelheroes.ui.activities.CharacterActivity
 import com.dnovaes.marvelheroes.ui.anvil.highOrderComponent
 import com.dnovaes.marvelheroes.ui.components.base.ScreenLayout
+import com.dnovaes.marvelheroes.ui.components.topBar.mainTopBar
 import trikita.anvil.BaseDSL.MATCH
 import trikita.anvil.BaseDSL.WRAP
 import trikita.anvil.BaseDSL.above
@@ -63,6 +65,11 @@ class CharactersScreen(context: Context): ScreenLayout(context) {
             above(navigationFooterId)
             items(state.characters.values.toList())
             renderIfChanged()
+            onClickItem { itemId ->
+                activity?.get()?.let {
+                    CharacterActivity.open(context, itemId, it)
+                }
+            }
         }
     }
 

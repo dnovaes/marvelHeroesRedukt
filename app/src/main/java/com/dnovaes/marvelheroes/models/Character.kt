@@ -10,5 +10,6 @@ data class Character(
     @Id(assignable = true) var _id: Long = id.toLong(),
     val name: String,
     val description: String,
-    @Transient val thumbnail: CharacterThumbnail
+    @Transient val thumbnail: CharacterThumbnail,
+    val resourceURI: String
 )

@@ -10,6 +10,7 @@ import com.dnovaes.marvelheroes.ui.components.characterDetailView
 import com.dnovaes.marvelheroes.ui.components.topBar.simpleTopBar
 import trikita.anvil.BaseDSL.MATCH
 import trikita.anvil.BaseDSL.size
+import trikita.anvil.DSL.scrollView
 
 class CharacterActivity : ReactiveActivity() {
 
@@ -35,9 +36,12 @@ class CharacterActivity : ReactiveActivity() {
             title(character.name)
         }
 
-        characterDetailView {
+        scrollView {
             size(MATCH, MATCH)
-            character(character)
+            characterDetailView {
+                size(MATCH, MATCH)
+                character(character)
+            }
         }
     }
 }

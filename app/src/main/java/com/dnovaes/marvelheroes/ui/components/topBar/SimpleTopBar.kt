@@ -16,10 +16,12 @@ import trikita.anvil.BaseDSL.margin
 import trikita.anvil.BaseDSL.size
 import trikita.anvil.BaseDSL.text
 import trikita.anvil.BaseDSL.textSize
+import trikita.anvil.DSL.backgroundColor
 import trikita.anvil.DSL.gravity
 import trikita.anvil.DSL.orientation
 import trikita.anvil.DSL.textColor
 import trikita.anvil.DSL.textView
+import trikita.anvil.DSL.view
 
 inline fun simpleTopBar(crossinline func: SimpleTopBar.() -> Unit) {
     highOrderComponent(func)
@@ -32,9 +34,9 @@ class SimpleTopBar(context: Context): LinearLayoutComponent(context) {
     override fun view() {
         size(MATCH, WRAP)
         orientation(VERTICAL)
-        margin(context.dp(R.dimen.margin_large), 0)
 
         renderTitle()
+        renderDivider()
     }
 
     private fun renderTitle() {
@@ -44,10 +46,18 @@ class SimpleTopBar(context: Context): LinearLayoutComponent(context) {
             textSize(context.sp(R.dimen.title_size))
             fontWeight(context, FontWeight.W700)
             textColor(context.color(R.color.colorPrimary))
-            margin(0, context.dp(R.dimen.margin_xx_default))
+            margin(context.dp(R.dimen.margin_large), context.dp(R.dimen.margin_xx_default))
             gravity(CENTER)
         }
     }
+
+    private fun renderDivider() {
+        view {
+            size(MATCH, context.dp(R.dimen.divider_mainscreen))
+            backgroundColor(context.color(R.color.colorPrimary))
+        }
+    }
+
 
     fun title(content: String) {
         if (title == content) return

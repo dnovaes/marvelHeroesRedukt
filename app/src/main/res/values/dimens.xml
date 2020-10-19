@@ -6,6 +6,7 @@
     <dimen name="sync_bar">6dp</dimen>
     <dimen name="divider_mainscreen">24dp</dimen>
     <dimen name="divider_footer">12dp</dimen>
+    <dimen name="character_image_extended">400dp</dimen>
 
     <!-- Radius -->
     <dimen name="radius_tiny">4dp</dimen>

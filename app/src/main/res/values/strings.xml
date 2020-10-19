@@ -5,4 +5,7 @@
     <string name="title_marvel_label">MARVEL</string>
     <string name="title_content_label">TESTE FRONT-END</string>
     <string name="character_not_found">Character Not Found</string>
+    <string name="name">Nome</string>
+    <string name="description">Descrição</string>
+    <string name="more_info">Mais informações</string>
 </resources>

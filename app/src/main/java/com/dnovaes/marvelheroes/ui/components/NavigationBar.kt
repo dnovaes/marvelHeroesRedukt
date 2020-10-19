@@ -16,16 +16,22 @@ import com.dnovaes.marvelheroes.utils.Font.fontWeight
 import com.dnovaes.marvelheroes.utils.FontWeight
 import trikita.anvil.BaseDSL.MATCH
 import trikita.anvil.BaseDSL.WRAP
+import trikita.anvil.BaseDSL.alignParentLeft
+import trikita.anvil.BaseDSL.alignParentRight
 import trikita.anvil.BaseDSL.margin
 import trikita.anvil.BaseDSL.size
 import trikita.anvil.BaseDSL.textSize
+import trikita.anvil.BaseDSL.toLeftOf
+import trikita.anvil.BaseDSL.toRightOf
 import trikita.anvil.DSL.backgroundColor
 import trikita.anvil.DSL.backgroundResource
 import trikita.anvil.DSL.backgroundTintList
 import trikita.anvil.DSL.gravity
+import trikita.anvil.DSL.id
 import trikita.anvil.DSL.imageView
 import trikita.anvil.DSL.linearLayout
 import trikita.anvil.DSL.orientation
+import trikita.anvil.DSL.relativeLayout
 import trikita.anvil.DSL.text
 import trikita.anvil.DSL.textColor
 import trikita.anvil.DSL.textView
@@ -40,17 +46,21 @@ class NavigationBar(context: Context): LinearLayoutComponent(context) {
     private var currentStep = 1
     private var onNavigate: ((Int) -> Unit)? = null
 
+    companion object {
+        val arrowLeftId = generateViewId()
+        val arrowRightId = generateViewId()
+        val stepsGroupId = generateViewId()
+    }
+
     override fun view() {
         size(MATCH, WRAP)
         orientation(VERTICAL)
 
-        linearLayout {
+        relativeLayout {
             size(MATCH, WRAP)
-            orientation(HORIZONTAL)
-            gravity(CENTER)
 
             renderArrow(true)
-            renderStepButtons()
+            renderStepsGroup()
             renderArrow(false)
         }
         renderBottomDivider()
@@ -63,16 +73,22 @@ class NavigationBar(context: Context): LinearLayoutComponent(context) {
         }
     }
 
+    private fun renderStepsGroup() {
+        linearLayout {
+            id(stepsGroupId)
+            toRightOf(arrowLeftId)
+            toLeftOf(arrowRightId)
+            size(MATCH, WRAP)
+            orientation(HORIZONTAL)
+            gravity(CENTER)
+
+            renderStepButtons()
+        }
+    }
+
     private fun renderStepButtons() {
-        val initialStep = if (currentStep>1)
-            currentStep-1
-        else
-            currentStep
-        val finalStep = if (currentStep>1)
-            currentStep+1
-        else
-            currentStep+2
-        for (stepShown in initialStep..finalStep) {
+        val stepLimits = prepareSteps()
+        for (stepShown in stepLimits.first..stepLimits.second) {
             textView {
                 size(context.dp(R.dimen.icon_medium), context.dp(R.dimen.icon_medium))
                 backgroundResource(R.drawable.background_round_icon)
@@ -85,6 +101,7 @@ class NavigationBar(context: Context): LinearLayoutComponent(context) {
                 }
                 text(stepShown.toString())
                 textSize(context.sp(R.dimen.body_size))
+                margin(context.dp(R.dimen.margin_default), context.dp(R.dimen.margin_l_medium))
                 gravity(CENTER)
                 fontWeight(context, FontWeight.W500)
                 onClick {
@@ -99,11 +116,16 @@ class NavigationBar(context: Context): LinearLayoutComponent(context) {
     private fun renderArrow(left: Boolean) {
         imageView {
             size(context.dp(R.dimen.icon_medium), context.dp(R.dimen.icon_medium))
-            if (left)
+            if (left) {
+                id(arrowLeftId)
                 backgroundResource(R.drawable.ic_arrow_left_play_24)
-            else
+                alignParentLeft()
+            } else {
+                id(arrowRightId)
                 backgroundResource(R.drawable.ic_arrow_right_play_24)
-            margin(context.dp(R.dimen.margin_large), context.dp(R.dimen.margin_x_medium))
+                alignParentRight()
+            }
+            margin(context.dp(R.dimen.margin_l_large), context.dp(R.dimen.margin_l_medium))
             onClickInit {
                 if (left && currentStep > 1) {
                     onNavigate?.invoke(currentStep-1)
@@ -115,6 +137,18 @@ class NavigationBar(context: Context): LinearLayoutComponent(context) {
                 render()
             }
         }
+    }
+
+    private fun prepareSteps(): Pair<Int, Int> {
+        val initialStep = if (currentStep>1)
+            currentStep-1
+        else
+            currentStep
+        val finalStep = if (currentStep>1)
+            currentStep+1
+        else
+            currentStep+2
+        return Pair(initialStep, finalStep)
     }
 
     fun onNavigate(callback: (Int)-> Unit) {

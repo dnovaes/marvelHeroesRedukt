@@ -57,7 +57,7 @@ class CharacterFeed(context: Context): FeedLayout<Character>(context) {
         filePath = filePath.replace("http:", "https:")
         imageView {
             size(WRAP, MATCH)
-            margin(context.dp(R.dimen.margin_l_medium))
+            margin(0, context.dp(R.dimen.margin_l_medium))
             glideBitmap(context, filePath, currentView())
         }
     }

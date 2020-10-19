@@ -42,6 +42,7 @@
     <dimen name="margin_l_medium">18dp</dimen>
     <dimen name="margin_x_medium">20dp</dimen>
     <dimen name="margin_xx_medium">24dp</dimen>
+    <dimen name="margin_l_large">30dp</dimen>
     <dimen name="margin_large">32dp</dimen>
     <dimen name="margin_x_large">40dp</dimen>
     <dimen name="margin_xxx_large">56dp</dimen>

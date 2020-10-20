@@ -43,6 +43,7 @@ class CharactersScreen(context: Context): ScreenLayout(context) {
             size(MATCH, WRAP)
             onFinishSearchTyping {
                 searchFilter = it
+                currentStep = 1
                 dispatchLoadCharacters()
             }
         }
@@ -77,6 +78,7 @@ class CharactersScreen(context: Context): ScreenLayout(context) {
         navigationBar {
             id(navigationFooterId)
             size(MATCH, WRAP)
+            currentStep(currentStep)
             alignParentBottom()
             init {
                 onNavigate { step ->

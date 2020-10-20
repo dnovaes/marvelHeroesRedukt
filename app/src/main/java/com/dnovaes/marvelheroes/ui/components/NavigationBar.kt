@@ -151,6 +151,11 @@ class NavigationBar(context: Context): LinearLayoutComponent(context) {
         return Pair(initialStep, finalStep)
     }
 
+    fun currentStep(currentStep: Int) {
+        this.currentStep = currentStep
+        hasChanged = true
+    }
+
     fun onNavigate(callback: (Int)-> Unit) {
         this.onNavigate = callback
     }
